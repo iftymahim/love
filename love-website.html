@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Love For You 💕</title>
+<link rel="shortcut icon" href="./picIcon.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --rose:      #FF6B9D;
+  --blush:     #FFB3CC;
+  --petal:     #FFE0EC;
+  --cream:     #FFF5F8;
+  --deep:      #C94B7B;
+  --text:      #4A1530;
+  --mid:       #7D3552;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ── PAGE SYSTEM ── */
+.page {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 32px 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateX(60px);
+  overflow: hidden;
+}
+.page.active {
+  opacity: 1; pointer-events: all;
+  transform: translateX(0);
+}
+.page.exit {
+  opacity: 0; transform: translateX(-60px);
+  pointer-events: none;
+}
+
+/* ── HEARTS BG ── */
+.hearts-bg {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.hf {
+  position: absolute; bottom: -60px;
+  font-size: 1.3rem; opacity: 0;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(-10deg); opacity: 0; }
+  10%  { opacity: 0.55; }
+  90%  { opacity: 0.25; }
+  100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+}
+
+/* ── PROGRESS DOTS ── */
+#dots {
+  position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px; z-index: 100;
+}
+.dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  border: 2px solid rgba(255,255,255,0.7);
+  transition: background .4s, transform .4s;
+  cursor: pointer;
+}
+.dot.on { background: #fff; transform: scale(1.35); }
+
+/* ── CLICK BUTTON ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 32px; padding: 16px 40px;
+  background: rgba(255,255,255,0.22);
+  border: 2px solid rgba(255,255,255,0.7);
+  border-radius: 60px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.35rem; color: #fff;
+  cursor: pointer; backdrop-filter: blur(6px);
+  transition: background .3s, transform .3s, box-shadow .3s;
+  text-decoration: none;
+}
+.btn:hover {
+  background: rgba(255,255,255,0.38);
+  transform: scale(1.06);
+  box-shadow: 0 8px 32px rgba(200,75,123,0.3);
+}
+.btn-dark {
+  background: rgba(201,75,123,0.15);
+  border-color: var(--rose); color: var(--deep);
+}
+.btn-dark:hover { background: rgba(201,75,123,0.25); }
+
+/* ── SHARED TYPOGRAPHY ── */
+.script { font-family: 'Dancing Script', cursive; }
+.serif  { font-family: 'Playfair Display', serif; }
+
+/* ── PAGE 1 — OPENING ── */
+#p1 {
+  background: linear-gradient(145deg, #ffb3cc 0%, #ff6b9d 50%, #c94b7b 100%);
+  z-index: 10;
+}
+#p1 .bear {
+  font-size: clamp(5rem, 15vw, 9rem);
+  animation: bounce 2.2s ease-in-out infinite;
+  display: block; margin-bottom: 20px; position: relative; z-index: 1;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-22px) rotate(4deg); }
+}
+#p1 h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.4rem, 8vw, 5.5rem);
+  color: #fff; line-height: 1.1; margin-bottom: 14px;
+  text-shadow: 0 4px 20px rgba(100,0,50,0.25);
+  position: relative; z-index: 1;
+}
+#p1 p {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: rgba(255,255,255,0.9); font-size: clamp(.95rem, 2.5vw, 1.2rem);
+  max-width: 500px; line-height: 1.8; position: relative; z-index: 1;
+}
+
+/* ── PAGE 2 — LETTER ── */
+#p2 { background: linear-gradient(160deg, #fff0f5, #ffe0ec); z-index: 9; }
+#p2 .card {
+  background: #fff;
+  border: 2px solid var(--blush);
+  border-radius: 28px; padding: 44px 40px;
+  max-width: 680px; width: 100%;
+  box-shadow: 0 20px 60px rgba(255,107,157,0.18);
+  position: relative; z-index: 1;
+}
+#p2 .card::before {
+  content: '💌'; position: absolute;
+  top: -22px; left: 50%; transform: translateX(-50%);
+  font-size: 2.4rem;
+}
+#p2 .card p {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(.9rem, 2vw, 1.05rem); color: var(--mid);
+  line-height: 1.95; margin-bottom: 16px; text-align: left;
+}
+#p2 .sig {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.7rem; color: var(--rose);
+  text-align: right; margin-top: 10px;
+}
+
+/* ── PAGE 3 — WHY I LOVE YOU ── */
+#p3 { background: linear-gradient(145deg, #ff6b9d, #c94b7b); z-index: 8; }
+#p3 h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: #fff; margin-bottom: 28px;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.15);
+  position: relative; z-index: 1;
+}
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px; max-width: 720px; width: 100%;
+  position: relative; z-index: 1;
+}
+@media (max-width: 560px) { .reasons-grid { grid-template-columns: repeat(2, 1fr); } }
+.rc {
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 18px; padding: 20px 14px;
+  backdrop-filter: blur(6px);
+  transition: transform .3s, background .3s;
+}
+.rc:hover { transform: translateY(-6px); background: rgba(255,255,255,0.28); }
+.rc .ri { font-size: 1.9rem; margin-bottom: 8px; }
+.rc h3 { font-family: 'Dancing Script', cursive; font-size: 1.15rem; color: #fff; margin-bottom: 5px; }
+.rc p  { font-size: .8rem; color: rgba(255,255,255,0.87); line-height: 1.5; }
+
+/* ── PAGE 4 — PHOTOS ── */
+#p4 { background: linear-gradient(160deg, #f36c99, #ffd6e8); z-index: 7; }
+#p4 h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--deep); margin-bottom: 6px; position: relative; z-index: 1;
+}
+#p4 .hint {
+  font-size: .88rem; color: var(--mid); margin-bottom: 24px;
+  position: relative; z-index: 1; font-style: italic;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px; max-width: 640px; width: 100%;
+  position: relative; z-index: 1;
+}
+@media (max-width: 480px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+.slot {
+  aspect-ratio: 1/1; border-radius: 16px;
+  background: var(--petal);
+  border: 2.5px dashed var(--blush);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: border-color .3s, transform .3s;
+}
+.slot:hover { border-color: var(--rose); transform: scale(1.04); }
+.slot input[type="file"] {
+  position: absolute; inset: 0; opacity: 0;
+  cursor: pointer; width: 100%; height: 100%;
+}
+.slot .si { font-size: 1.6rem; }
+.slot .sl { font-size: .7rem; color: var(--mid); margin-top: 5px; font-weight: 600; }
+.slot img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.slot .rb {
+  position: absolute; top: 5px; right: 5px;
+  background: rgba(255,255,255,0.92); border: none;
+  border-radius: 50%; width: 24px; height: 24px;
+  font-size: .75rem; cursor: pointer; display: none;
+  align-items: center; justify-content: center;
+  color: var(--deep); font-weight: bold;
+}
+.slot:hover .rb { display: flex; }
+
+/* ── PAGE 5 — POEM ── */
+#p5 { background: linear-gradient(145deg, #ffb3cc, #ff6b9d); z-index: 6; }
+#p5 .poem-box {
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.5);
+  border-radius: 28px; padding: 44px 40px;
+  max-width: 580px; width: 100%;
+  backdrop-filter: blur(8px);
+  position: relative; z-index: 1;
+}
+#p5 .bear-poem { font-size: 3.5rem; margin-bottom: 16px; display: block; }
+#p5 h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: #fff; margin-bottom: 20px;
+}
+#p5 .poem-lines {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: rgba(255,255,255,0.93); font-size: clamp(.92rem, 2vw, 1.08rem);
+  line-height: 2.1;
+}
+#p5 .poem-lines strong { font-style: normal; color: #fff; font-weight: 700; }
+
+/* ── PAGE 6 — PROMISES ── */
+#p6 { background: linear-gradient(160deg, #fff0f5, #ffe0ec); z-index: 5; }
+#p6 h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--deep); margin-bottom: 24px; position: relative; z-index: 1;
+}
+.promise-list {
+  list-style: none; max-width: 600px; width: 100%;
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative; z-index: 1;
+}
+.promise-list li {
+  background: linear-gradient(135deg, #ffd6e8, #ffb3cc);
+  border-left: 4px solid var(--blush);
+  border-radius: 0 14px 14px 0;
+  padding: 14px 20px;
+  box-shadow: 0 4px 18px rgba(255,107,157,0.15);
+  display: flex; align-items: center; gap: 12px;
+  font-size: .95rem; line-height: 1.5; text-align: left;
+  cursor: pointer; user-select: none;
+  transition: transform .2s, box-shadow .2s, border-color .3s, background .6s;
+  position: relative; overflow: hidden;
+}
+.promise-list li:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 28px rgba(255,107,157,0.25);
+}
+/* Hidden text overlay */
+.promise-list li .promise-text {
+  opacity: 0;
+  color: var(--mid);
+  transition: opacity .5s ease .1s;
+  flex: 1;
+}
+.promise-list li .mystery-label {
+  flex: 1; color: rgba(255,255,255,0.85);
+  font-style: italic; font-size: .88rem;
+  transition: opacity .3s ease;
+}
+/* Unlocked state */
+.promise-list li.unlocked {
+  background: linear-gradient(135deg, #fff0f5, #ffe4ee);
+  border-color: var(--rose);
+  border-left-width: 5px;
+}
+.promise-list li.unlocked .promise-text { opacity: 1; }
+.promise-list li.unlocked .mystery-label { opacity: 0; position: absolute; pointer-events: none; }
+.promise-list li.unlocked .pi2 {
+  animation: spinPop .5s ease;
+}
+@keyframes spinPop {
+  0%   { transform: scale(1) rotate(0deg); }
+  40%  { transform: scale(1.6) rotate(-15deg); }
+  70%  { transform: scale(1.3) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+/* Heart burst on click */
+.promise-list li .burst {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 1.1rem; opacity: 0; pointer-events: none;
+  transition: none;
+}
+.promise-list li.unlocked .burst {
+  animation: burstOut .6s ease forwards;
+}
+@keyframes burstOut {
+  0%   { opacity: 0; transform: translateY(-50%) scale(0); }
+  50%  { opacity: 1; transform: translateY(-50%) scale(1.4); }
+  100% { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+/* Lock icon */
+.lock-icon {
+  margin-left: auto; font-size: 1rem; flex-shrink: 0;
+  opacity: 0.35; transition: opacity .3s;
+}
+.promise-list li.unlocked .lock-icon { opacity: 0; width: 0; overflow: hidden; }
+/* Ripple */
+.promise-list li .ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,107,157,0.25);
+  transform: scale(0); animation: rippleAnim .5s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+/* Progress bar under title */
+.promise-progress-wrap {
+  width: 100%; max-width: 600px; position: relative; z-index: 1;
+  margin-bottom: 14px;
+}
+.promise-progress-label {
+  font-size: .8rem; color: var(--mid); margin-bottom: 6px; text-align: left;
+  font-style: italic;
+}
+.promise-progress-bar {
+  height: 6px; background: var(--petal); border-radius: 10px; overflow: hidden;
+}
+.promise-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--blush), var(--rose));
+  border-radius: 10px;
+  transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+.pi2 { font-size: 1.3rem; flex-shrink: 0; }
+
+/* ── PAGE 7 — FINAL ── */
+#p7 {
+  background: linear-gradient(145deg, #ff6b9d, #c94b7b);
+  z-index: 4;
+}
+#p7 .big-bear {
+  font-size: clamp(5rem, 15vw, 8rem);
+  animation: pulse 2s ease-in-out infinite;
+  display: block; margin-bottom: 20px; position: relative; z-index: 1;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.1); }
+}
+#p7 h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  color: #fff; margin-bottom: 14px;
+  text-shadow: 0 4px 20px rgba(100,0,50,0.2);
+  position: relative; z-index: 1;
+}
+#p7 p {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: rgba(255,255,255,0.9); font-size: clamp(.95rem, 2vw, 1.15rem);
+  max-width: 480px; line-height: 1.8; position: relative; z-index: 1;
+}
+#p7 .confetti { font-size: 1.8rem; margin-top: 20px; position: relative; z-index: 1; }
+
+/* ── NAV ARROWS ── */
+#prevBtn {
+  position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.6);
+  width: 46px; height: 46px; border-radius: 50%;
+  font-size: 1.2rem; color: #fff; cursor: pointer;
+  backdrop-filter: blur(6px); z-index: 200;
+  transition: background .3s; display:none;
+}
+#prevBtn:hover { background: rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<div class="hearts-bg" id="hc"></div>
+
+<!-- Prev arrow -->
+<button id="prevBtn" onclick="go(-1)">‹</button>
+
+<!-- Progress dots -->
+<div id="dots"></div>
+
+<!-- ══ PAGE 1 — OPENING ══ -->
+<div class="page active" id="p1">
+  <span class="bear">🧸</span>
+  <h1>For You,<br>My Love 💕</h1>
+  <p>Something special is waiting for you inside.<br>Each click is a piece of my heart.</p>
+  <button class="btn" onclick="go(1)">Open My Heart &nbsp;💖</button>
+</div>
+
+<!-- ══ PAGE 2 — LETTER ══ -->
+<div class="page" id="p2">
+  <div class="card">
+    <p>My Noor,</p>
+    <p>
+      Words have never felt enough when it comes to describing what you mean to me.
+      You walked into my life all of a sudden and quietly rearranged everything — the way sunlight does
+      when it finds its way through a window. Warm. Inevitable. Impossible to ignore.
+    </p>
+    <p>
+      In you I found my bestest friend, my favourite person, my safest place, and the reason I smile every single day. Your smile could outshine a thousand stars.
+    </p>
+    <p>Forever and always, more than words could ever say —</p>
+    <div class="sig">Your Biggest Gadha 🌸</div>
+  </div>
+  <button class="btn btn-dark" onclick="go(1)" style="margin-top:24px;">Next &nbsp;💕</button>
+</div>
+
+<!-- ══ PAGE 3 — WHY I LOVE YOU ══ -->
+<div class="page" id="p3">
+  <h2>Why I Love You 🌸</h2>
+  <div class="reasons-grid">
+    <div class="rc"><div class="ri">🌸</div><h3>Your Smile</h3><p>It brightens every room and every day.</p></div>
+    <div class="rc"><div class="ri">🫂</div><h3>Your Warmth</h3><p>Your arms feel like the safest place on earth.</p></div>
+    <div class="rc"><div class="ri">✨</div><h3>Your Soul</h3><p>Every part of you is breathtaking.</p></div>
+    <div class="rc"><div class="ri">🎵</div><h3>Your Laugh</h3><p>The sweetest melody I've ever heard.</p></div>
+    <div class="rc"><div class="ri">🧸</div><h3>Your Silliness</h3><p>You make ordinary moments magical.</p></div>
+    <div class="rc"><div class="ri">💪</div><h3>Your Strength</h3><p>Braver and stronger than you know.</p></div>
+  </div>
+  <button class="btn" onclick="go(1)" style="margin-top:24px;">Keep Going &nbsp;✨</button>
+</div>
+
+<!-- ══ PAGE 4 — PHOTOS ══ -->
+<div class="page" id="p4">
+  <h2 style="margin-bottom:28px;">Our Memories 📸</h2>
+  <div class="gallery" id="gallery"></div>
+  <button class="btn btn-dark" onclick="go(1)" style="margin-top:22px;">Next &nbsp;💕</button>
+</div>
+
+<!-- ══ PAGE 5 — POEM ══ -->
+<div class="page" id="p5">
+  <div class="poem-box">
+    <span class="bear-poem">🧸💕</span>
+    <h2>A Little Poem</h2>
+    <div class="poem-lines">
+A listening ear, a gentle smile, <br>
+<strong>You</strong> make life feel better, every while. <br>
+
+Through ups and downs, through thick and thin, <br>
+You're the kind of friend who lifts me up within. <br>
+
+No need for big things or words so grand, <br>
+Just <strong>your presence</strong> —I feel safe, I understand. <br>
+
+Thank you for being you, for all you do, <br>
+I'm so lucky and <strong>grateful</strong> to have <strong>you</strong>.
+    </div>
+  </div>
+  <button class="btn" onclick="go(1)" style="margin-top:28px;">Almost There &nbsp;🌸</button>
+</div>
+
+<!-- ══ PAGE 6 — PROMISES ══ -->
+<div class="page" id="p6">
+  <h2>My Promises to You 🤝</h2>
+
+  <div class="promise-progress-wrap">
+    <div class="promise-progress-label" id="progressLabel">Tap each promise to unlock 💕</div>
+    <div class="promise-progress-bar"><div class="promise-progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <ul class="promise-list" id="promiseList">
+    <li onclick="unlockPromise(this)">
+      <span class="pi2">💕</span>
+      <span class="mystery-label">✨ Tap to reveal promise #1 ✨</span>
+      <span class="promise-text">I promise to listen when you need to be heard, even when you don't know what to say.</span>
+      <span class="lock-icon">🔒</span>
+      <span class="burst">✨</span>
+    </li>
+    <li onclick="unlockPromise(this)">
+      <span class="pi2">🧸</span>
+      <span class="mystery-label">✨ Tap to reveal promise #2 ✨</span>
+      <span class="promise-text">I promise to remind you how strong you are on the days you forget.</span>
+      <span class="lock-icon">🔒</span>
+      <span class="burst">💖</span>
+    </li>
+    <li onclick="unlockPromise(this)">
+      <span class="pi2">🌙</span>
+      <span class="mystery-label">✨ Tap to reveal promise #3 ✨</span>
+      <span class="promise-text">I promise to remind you how strong you are on the days you forget.</span>
+      <span class="lock-icon">🔒</span>
+      <span class="burst">🌸</span>
+    </li>
+    <li onclick="unlockPromise(this)">
+      <span class="pi2">😂</span>
+      <span class="mystery-label">✨ Tap to reveal promise #4 ✨</span>
+      <span class="promise-text">I promise to make you laugh as often as I possibly can.</span>
+      <span class="lock-icon">🔒</span>
+      <span class="burst">🎉</span>
+    </li>
+    <li onclick="unlockPromise(this)">
+      <span class="pi2">🌸</span>
+      <span class="mystery-label">✨ Tap to reveal promise #5 ✨</span>
+      <span class="promise-text"> I promise to make sure you know that you are valued and appreciated.</span>
+      <span class="lock-icon">🔒</span>
+      <span class="burst">💕</span>
+    </li>
+    <li onclick="unlockPromise(this)">
+      <span class="pi2">⭐</span>
+      <span class="mystery-label">✨ Tap to reveal promise #6 ✨</span>
+      <span class="promise-text">I promise to never take your kindness for granted.</span>
+      <span class="lock-icon">🔒</span>
+      <span class="burst">⭐</span>
+    </li>
+  </ul>
+
+  <button class="btn btn-dark" id="promiseNextBtn" onclick="go(1)"
+    style="margin-top:24px; opacity:0; pointer-events:none; transition: opacity .5s;">
+    One More Thing &nbsp;💖
+  </button>
+</div>
+
+<!-- ══ PAGE 7 — FINALE ══ -->
+<div class="page" id="p7">
+  <span class="big-bear">🧸</span>
+  <h1>Forever Yours 💕</h1>
+  <p>You are my once in a life time Miracle,<br>it all belongs to you, my love. Always.</p>
+  <div class="confetti" id="cf"></div>
+  <button class="btn" onclick="go(0)" style="margin-top:20px;">From the Beginning 🔁</button>
+</div>
+
+<script>
+// ── Floating hearts ──
+const hc = document.getElementById('hc');
+const syms = ['❤️','💕','💗','💓','💖','💝','🌸','✨','🧸'];
+for (let i = 0; i < 22; i++) {
+  const h = document.createElement('div');
+  h.className = 'hf';
+  h.textContent = syms[Math.floor(Math.random() * syms.length)];
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.fontSize = (.8 + Math.random() * 1.2) + 'rem';
+  h.style.animationDuration = (9 + Math.random() * 14) + 's';
+  h.style.animationDelay   = (Math.random() * 14) + 's';
+  hc.appendChild(h);
+}
+
+// ── Pages ──
+const pages = Array.from(document.querySelectorAll('.page'));
+const TOTAL = pages.length;
+let cur = 0;
+
+// Dots
+const dotsEl = document.getElementById('dots');
+pages.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' on' : '');
+  d.onclick = () => go(i - cur);
+  dotsEl.appendChild(d);
+});
+
+function go(delta) {
+  let next = cur + delta;
+  if (delta === 0) next = 0; // restart
+  if (next < 0 || next >= TOTAL) return;
+
+  pages[cur].classList.add('exit');
+  pages[cur].classList.remove('active');
+  setTimeout(() => pages[cur < next ? cur : next + 1]?.classList.remove('exit'), 700);
+
+  cur = next;
+
+  setTimeout(() => {
+    pages.forEach(p => { p.classList.remove('active', 'exit'); });
+    pages[cur].classList.add('active');
+    updateDots();
+    document.getElementById('prevBtn').style.display = cur > 0 ? 'flex' : 'none';
+    if (cur === TOTAL - 1) launchConfetti();
+  }, 50);
+}
+
+function updateDots() {
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('on', i === cur);
+  });
+}
+
+// ── Photo Gallery ──
+const photos = [
+  './pic01.jpeg', // ← paste your 1st photo base64 here
+  './pic02.jpeg', // ← paste your 2nd photo base64 here
+  './pic03.jpeg', // ← paste your 3rd photo base64 here
+  './pic04.jpeg',
+  './pic05.jpeg',
+  './pic06.jpeg',
+  null, // ← leave as null if no photo for this slot
+  null,
+  null,
+];
+const labels = ['First Memory','Favourite Smile','Perfect Day','Silly & Sweet','Just Us','Our Story'];
+const emojis = ['📸','🌸','💕','😄','🧸','💖'];
+const gallery = document.getElementById('gallery');
+for (let i = 0; i < 6; i++) {
+  const slot = document.createElement('div');
+  slot.className = 'slot'; slot.id = 'sl'+i;
+  slot.innerHTML = `
+    <div class="si">${emojis[i]}</div>
+    <div class="sl">${labels[i]}</div>
+  `;
+  if (photos[i]) {
+    const img = document.createElement('img');
+    img.src = photos[i];
+    slot.prepend(img);
+    slot.querySelector('.si').style.display = 'none';
+    slot.querySelector('.sl').style.display = 'none';
+  }
+  gallery.appendChild(slot);
+}
+
+
+// ── Promise Unlock ──
+function unlockPromise(li) {
+  if (li.classList.contains('unlocked')) return;
+
+  // Ripple effect
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  const size = Math.max(li.offsetWidth, li.offsetHeight);
+  ripple.style.cssText = `width:${size}px;height:${size}px;left:0;top:${li.offsetHeight/2 - size/2}px;`;
+  li.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+
+  // Unlock
+  li.classList.add('unlocked');
+
+  // Update progress
+  const all  = document.querySelectorAll('#promiseList li');
+  const done = document.querySelectorAll('#promiseList li.unlocked').length;
+  const pct  = Math.round(done / all.length * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  const labels = [
+    'Tap each promise to unlock 💕',
+    'Keep going... 🌸',
+    'Halfway there! 💖',
+    'Almost all unlocked ✨',
+    'Just one more! 🧸',
+    'All unlocked! 💕',
+    'All my promises are yours forever 💍'
+  ];
+  document.getElementById('progressLabel').textContent = labels[done] || labels[labels.length-1];
+
+  // Show next button when all unlocked
+  if (done === all.length) {
+    setTimeout(() => {
+      const btn = document.getElementById('promiseNextBtn');
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'all';
+    }, 400);
+  }
+}
+
+// Reset promises when re-entering page 6
+const _origGo = go;
+
+// ── Confetti finale ──
+function launchConfetti() {
+  const cf = document.getElementById('cf');
+  cf.textContent = '';
+  const items = ['🎉','💕','🌸','✨','💖','🧸','❤️','🎊'];
+  for (let i = 0; i < 14; i++) {
+    const s = document.createElement('span');
+    s.textContent = items[Math.floor(Math.random() * items.length)];
+    s.style.cssText = `display:inline-block;animation:popIn .4s ${i*.07}s both ease-out;font-size:1.5rem;`;
+    cf.appendChild(s);
+  }
+  if (!document.getElementById('popKf')) {
+    const style = document.createElement('style');
+    style.id = 'popKf';
+    style.textContent = '@keyframes popIn{from{transform:scale(0) rotate(-30deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}';
+    document.head.appendChild(style);
+  }
+}
+</script>
+</body>
+</html>
